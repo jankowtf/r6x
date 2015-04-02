@@ -1,0 +1,3 @@
+CYGWIN = nodosfilewarning
+LANGUAGE = en
+R_LIBS_USER = ~/R/library

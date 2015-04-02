@@ -1,0 +1,15 @@
+Package: r6x
+Type: Package
+Title: Extensions to the R6 package
+Version: 0.1
+Date: 2015-04-02
+Authors@R: person("Janko", "Thyson", email = "janko.thyson@gmail.com", role = c("aut", "cre"))
+Description: Facilitates the creation of formal S4 equivalents for R6 classes
+    and provides a base layer object for inheritance featuring basic methods
+    such as `.getFieldNames()` and `.getMethodNames()` that seem to be
+    required often.
+URL: http://github.com/rappster/r6x
+BugReports: http://github.com/rappster/r6x/issues
+License: GPL (>= 2)
+Imports: R6
+VignetteBuilder: knitr
