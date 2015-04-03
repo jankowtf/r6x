@@ -13,7 +13,9 @@ require("r6x")
 
 ## Formal S4 equivalents of R6 classes
 
-Whenever you define an R6 class, you can also provide the necessary information in order to easily register formal S4 equivalents with a later call to `formalizeClasses()`. Formal S4 equivalents are useful whenever you would like to define/use formal S4 methods that take your R6 classes as signature arguments.
+Defining your R6 classes with this function instead of `R6Class()` ensures the buffering of information that is required in order to register formal S4 equivalents. This information is picked up and processed by `formalizeClasses()` which carries out the actual class registration. 
+
+Having formal S4 equivalents for your R6 classes is useful whenever you would like to use instances of those R6 classes as signature arguments of S4 methods.
 
 ### Class without inheritance
 
@@ -114,4 +116,70 @@ So this is a template of how your `.onLoad()` function should look like when usi
 }
 ```
 
+## R6X - a baselayer class for your R6 classes
+
+Class `R6X` can be seen as a baselayer class that offers some basic methods that - at least I - seem to often need when working with R6 classes.
+
+Define example class that inherits from `R6X`:
+
+```
+require(R6)
+Test <- R6Class(
+  classname = "Test",
+  inherit = R6X,
+  public = list(
+    field_1 = letters,
+    field_2 = TRUE,
+    field_3 = list(a = 1, b = 2),
+    field_4 = data.frame(a = 1:3, b = 1:3),
+    field_5 = 1.5,
+    field_6 = as.integer(1),
+    field_7 = NULL,
+    field_8 = NA,
+    foo = function() {
+      super$.message("My message", id = "foo")
+      "hello"
+    },
+    bar = function() {
+      super$.warning("My warning", id = "bar")
+      "world!"
+    }
+  )
+)
+```
+
+Instantiate:
+
+```
+inst <- Test$new()
+```
+
+Investigate class methods:
+
+```
+inst$.getComponentNames()
+inst$.getComponentClasses()
+
+inst$.getFieldNames()
+inst$.getMethodNames()
+
+inst$.message("Hello world!")
+inst$.message("Hello world!", id = "abc")
+inst$.warning("Hello world!")
+inst$.warning("Hello world!", id = "abc")
+inst$.error("Hello world!")
+inst$.error("Hello world!", id = "abc")
+
+inst$.getField("field_1")
+inst$.getField("field_xyz")
+inst$.getField("field_xyz", strict = 1)
+inst$.getField("field_xyz", strict = 2)
+inst$.getField("field_xyz", strict = 3)
+
+inst$.setField("field_1", value = NA, strict = 3)
+inst$.setField("field_1", value = NA, strict = 2)
+## --> setting NOT blocked, so it went through with a warning:
+inst$.getField("field_1")
+inst$.setField("field_1", value = letters, strict = 1)
+```
 

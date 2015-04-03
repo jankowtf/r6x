@@ -1,8 +1,8 @@
-## Define example class that inherits from `R6Object` //
+## Define example class that inherits from `R6X` //
 require(R6)
 Test <- R6Class(
   classname = "Test",
-  inherit = R6Object,
+  inherit = R6X,
   public = list(
     field_1 = letters,
     field_2 = TRUE,
