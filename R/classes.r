@@ -1,5 +1,5 @@
 #' @title
-#' Class: R6Object
+#' Class: R6X
 #'
 #' @description
 #' Base layer class for inheritance providing a number of methods that
@@ -47,12 +47,12 @@
 #'
 #' @format An \code{\link{R6Class}} generator object
 #' @docType class
-#' @example inst/examples/R6Object.r
+#' @example inst/examples/R6X.r
 #' @export
 #' @import R6
 
-R6Object <- R6Class(
-  classname = "R6Object",
+R6X <- R6Class(
+  classname = "R6X",
   portable = TRUE,
   public = list(
     .error = function(
