@@ -23,7 +23,7 @@ if (exists("Test")) {
   rm("Test")
 }
 exists("Test")
-ls(getOption(".classes"))
+getOption(".classes")
 
 ## Define R6 class //
 Test <- withFormalClass(
